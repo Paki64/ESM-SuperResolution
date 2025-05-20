@@ -1,0 +1,17 @@
+services:
+  jupyter-pytorch:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: jupyter-pytorch
+    restart: unless-stopped
+    ipc: host
+    environment:
+      - TZ=Europe/Rome
+    ports:
+      - "8090:80"
+    volumes:
+      - "./workspace:/root/projects"
+    devices:
+      - nvidia.com/gpu=all
+    runtime: nvidia
